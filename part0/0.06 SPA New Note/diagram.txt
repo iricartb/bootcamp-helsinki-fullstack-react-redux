@@ -1,0 +1,22 @@
+note over browser:
+The user enters the new note
+"Hello World!" to text field,
+then submit the form
+end note
+
+note over browser:
+browser push the note information
+to notes array, then it's rendered
+on the screen
+end note
+
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+
+note over server:
+HTTP 201 content created, 
+indicates that the request has 
+succeeded and the specified 
+resource has been created
+end note
+
+server-->browser: HTTP 201 Created

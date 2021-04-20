@@ -1,0 +1,61 @@
+/* eslint-disable no-undef */
+const mongoose = require('mongoose')
+const supertest = require('supertest')
+const helper = require('./test_helper')
+const app = require('../app')
+const Blog = require('../models/blog')
+
+const api = supertest(app)
+
+beforeEach(async () => {
+   await Blog.deleteMany({})
+
+   for (let blog of helper.initialBlogs) {
+      let blogObject = new Blog(blog)
+      await blogObject.save()
+   }
+})
+
+test('blogs are returned as json', async () => {
+   await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+})
+
+test('blogs has the id parameter as a unique identifier', () => {
+   const blog = new Blog()
+
+   expect(blog.id).toBeDefined()
+})
+
+describe('addition of a new blog', () => {
+   test('succeeds with valid data', async () => {
+      const newBlog = {
+         title: 'Advanced SQL Injection - IIS & DBO',
+         author: 'Ivan Ricart Borges',
+         url: 'https://advanced-sql-injection.blogspot.com',
+         likes: 100
+      }
+
+      await api
+         .post('/api/blogs')
+         .send(newBlog)
+         .expect(200)
+         .expect('Content-Type', /application\/json/)
+
+      const blogsAtEnd = await helper.blogsInDb()
+
+      expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length + 1)
+
+      const titles = blogsAtEnd.map(b => b.title)
+
+      expect(titles).toContain(
+         'Advanced SQL Injection - IIS & DBO'
+      )
+   })
+})
+
+afterAll(() => {
+   mongoose.connection.close()
+})

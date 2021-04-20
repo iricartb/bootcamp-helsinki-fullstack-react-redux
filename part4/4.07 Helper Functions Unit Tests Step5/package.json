@@ -1,0 +1,23 @@
+{
+  "name": "ex4.7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "jest --verbose",
+    "lint": "eslint ."
+  },
+  "author": "Ivan Ricart Borges",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.24.0",
+    "jest": "^26.6.3",
+    "nodemon": "^2.0.7"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
