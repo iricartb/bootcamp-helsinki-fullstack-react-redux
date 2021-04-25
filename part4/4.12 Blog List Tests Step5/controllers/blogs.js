@@ -10,24 +10,19 @@ blogsRouter.get('/', async (request, response) => {
 blogsRouter.post('/', async (request, response) => {
    const body = request.body
 
-   if ((body.title !== undefined) && (body.url !== undefined)) {
-      if (body.likes === undefined) {
-         body.likes = 0
-      }
-
-      const blog = new Blog({
-         title: body.title,
-         author: body.author,
-         url: body.url,
-         likes: body.likes
-      })
-
-      const savedBlog = await blog.save()
-      response.json(savedBlog)
+   if (body.likes === undefined) {
+      body.likes = 0
    }
-   else {
-      response.status(400).end()
-   }
+
+   const blog = new Blog({
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes
+   })
+
+   const savedBlog = await blog.save()
+   response.json(savedBlog)
 })
 
 module.exports = blogsRouter
