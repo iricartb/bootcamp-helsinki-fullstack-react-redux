@@ -1,13 +1,12 @@
 {
-  "name": "ex4.22",
+  "name": "ex4.23",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest --verbose --silent --runInBand",
-    "test:watch": "npm run test -- --watch",
+    "test": "cross-env NODE_ENV=test jest --verbose --silent --runInBand tests/user_api.test.js && cross-env NODE_ENV=test jest --verbose --silent --runInBand tests/blog_api.test.js",
     "lint": "eslint ."
   },
   "author": "Ivan Ricart Borges",

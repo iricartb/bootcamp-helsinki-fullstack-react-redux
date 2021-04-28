@@ -38,8 +38,13 @@ describe('addition of a new blog', () => {
          likes: 100
       }
 
+      const loginResponse = await api.post('/api/login').send({ username: 'iricartb', password: 'ABCabc123' })
+
+      const token = JSON.parse(loginResponse.text).token
+
       await api
          .post('/api/blogs')
+         .auth(token, { type: 'bearer' })
          .send(newBlog)
          .expect(200)
          .expect('Content-Type', /application\/json/)
@@ -62,8 +67,13 @@ describe('addition of a new blog', () => {
          url: 'https://propagation-techniques-used-by-viruses.blogspot.com'
       }
 
+      const loginResponse = await api.post('/api/login').send({ username: 'iricartb', password: 'ABCabc123' })
+
+      const token = JSON.parse(loginResponse.text).token
+
       await api
          .post('/api/blogs')
+         .auth(token, { type: 'bearer' })
          .send(newBlogWithoutLikes)
          .expect(200)
          .expect('Content-Type', /application\/json/)
@@ -88,15 +98,39 @@ describe('addition of a new blog', () => {
          likes: 50
       }
 
+      const loginResponse = await api.post('/api/login').send({ username: 'iricartb', password: 'ABCabc123' })
+
+      const token = JSON.parse(loginResponse.text).token
+
       await api
          .post('/api/blogs')
+         .auth(token, { type: 'bearer' })
          .send(newBlogWithoutTitle)
          .expect(400)
 
       await api
          .post('/api/blogs')
+         .auth(token, { type: 'bearer' })
          .send(newBlogWithoutUrl)
          .expect(400)
+   })
+
+   test('fails with status code 401 unauthorized token', async () => {
+      const newBlog = {
+         title: 'Advanced SQL Injection - IIS & DBO',
+         author: 'Ivan Ricart Borges',
+         url: 'https://advanced-sql-injection.blogspot.com',
+         likes: 100
+      }
+
+      const token = 'cZJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9'
+
+      await api
+         .post('/api/blogs')
+         .auth(token, { type: 'bearer' })
+         .send(newBlog)
+         .expect(401)
+         .expect('Content-Type', /application\/json/)
    })
 })
 
@@ -107,8 +141,13 @@ describe('modification of a blog', () => {
 
       blogToUpdate.title = 'Dark Side'
 
+      const loginResponse = await api.post('/api/login').send({ username: 'iricartb', password: 'ABCabc123' })
+
+      const token = JSON.parse(loginResponse.text).token
+
       await api
          .put(`/api/blogs/${blogToUpdate.id}`)
+         .auth(token, { type: 'bearer' })
          .send(blogToUpdate)
          .expect(200)
          .expect('Content-Type', /application\/json/)
@@ -128,8 +167,13 @@ describe('deletion of a blog', () => {
       const blogsAtStart = await helper.blogsInDb()
       const blogToDelete = blogsAtStart[0]
 
+      const loginResponse = await api.post('/api/login').send({ username: 'iricartb', password: 'ABCabc123' })
+
+      const token = JSON.parse(loginResponse.text).token
+
       await api
          .delete(`/api/blogs/${blogToDelete.id}`)
+         .auth(token, { type: 'bearer' })
          .expect(204)
 
       const blogsAtEnd = await helper.blogsInDb()
