@@ -1,4 +1,4 @@
-<img src="https://pic1.zhimg.com/v2-1f16105426dfc07c064857af2d358c00_720w.jpg?source=172ae18b" />
+<img src="https://res.cloudinary.com/practicaldev/image/fetch/s--0FRJGdyZ--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/epv55hgtsfi8csprpj9u.jpg" />
 <h1>Bootcamp Helsinki</h1>
 <h2>Full Stack Open 2021</h2>
 Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.<br><br>
