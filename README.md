@@ -1,4 +1,4 @@
-<img src="https://www.xpand-it.com/wp-content/uploads/2020/04/AFBannerReact_1920x500.png" />
+<img src="https://pic1.zhimg.com/v2-1f16105426dfc07c064857af2d358c00_720w.jpg?source=172ae18b" />
 <h1>Bootcamp Helsinki</h1>
 <h2>Full Stack Open 2021</h2>
 Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.<br><br>
