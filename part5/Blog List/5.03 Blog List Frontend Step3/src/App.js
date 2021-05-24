@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
@@ -15,9 +14,7 @@ const App = () => {
    const [ errorMessage, setErrorMessage ] = useState(null)
 
    useEffect(() => {
-      blogService.getAll().then(blogs =>
-         setBlogs(blogs)
-      )  
+      getBlogs()
    }, [])
 
    useEffect(() => {
@@ -59,15 +56,13 @@ const App = () => {
                url: newBlogUrl
             }
 
-            const newBlog = null
-
             if (blogsExist.length === 0) {
                const newBlog = await blogService.create(blogObject)
 
                setBlogs(blogs.concat(newBlog))
             }
             else {
-               const newBlog = await blogService.update(blogsExist[0].id, blogObject)
+               const newBlog = await blogService.updateById(blogsExist[0].id, blogObject)
 
                setBlogs(blogs.map(blog => blog.id !== blogsExist[0].id ? blog : newBlog))
             }
@@ -106,24 +101,28 @@ const App = () => {
    )
 
    const blogForm = () => (
-      <form onSubmit={addBlog}>
-         <div>
-            title:
-            <input type="text" value={newBlogTitle} name="Title" onChange={({target}) => setNewBlogTitle(target.value)} />
-         </div>
-         
-         <div>
-            author:
-            <input type="text" value={newBlogAuthor} name="Author" onChange={({target}) => setNewBlogAuthor(target.value)} />
-         </div>
+      <div>
+         <h2>Create a new blog</h2>
 
-         <div>
-            url:
-            <input type="text" value={newBlogUrl} name="Url" onChange={({target}) => setNewBlogUrl(target.value)} />
-         </div>
+         <form onSubmit={addBlog}>
+            <div>
+               title:
+               <input type="text" value={newBlogTitle} name="Title" onChange={({target}) => setNewBlogTitle(target.value)} />
+            </div>
+            
+            <div>
+               author:
+               <input type="text" value={newBlogAuthor} name="Author" onChange={({target}) => setNewBlogAuthor(target.value)} />
+            </div>
 
-         <button type="submit">save</button>
-      </form>
+            <div>
+               url:
+               <input type="text" value={newBlogUrl} name="Url" onChange={({target}) => setNewBlogUrl(target.value)} />
+            </div>
+
+            <button type="submit">save</button>
+         </form>
+      </div>
    )
 
    const handleLogin = async (event) => {
@@ -171,7 +170,7 @@ const App = () => {
 
    return (
       <div>
-         <h2>blogs</h2>
+         <h2>Blogs</h2>
 
          {errorMessage}
 

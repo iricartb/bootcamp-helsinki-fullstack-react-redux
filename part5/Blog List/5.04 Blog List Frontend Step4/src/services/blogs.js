@@ -7,9 +7,9 @@ let token = null
 const setToken = newToken => { token = `bearer ${newToken}` }
 
 const getAll = async () => {
-  const response = await axios.get(baseUrl)
+   const response = await axios.get(baseUrl)
   
-  return response.data
+   return response.data
 }
 
 const create = async newObject => {
@@ -22,7 +22,7 @@ const create = async newObject => {
    return response.data
 }
 
-const update = async (id, newObject) => {
+const updateById = async (id, newObject) => {
    const config = { 
       headers: { Authorization: token }
    }
@@ -32,4 +32,4 @@ const update = async (id, newObject) => {
    return response.data
 }
 
-export default { getAll, create, update, setToken }
+export default { getAll, create, updateById, setToken }
