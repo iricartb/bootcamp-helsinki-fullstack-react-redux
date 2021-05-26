@@ -133,7 +133,7 @@ const App = () => {
    }
 
    blogs.sort((b1, b2) => (
-      b1.likes < b2.likes
+      b2.likes - b1.likes
    ))
 
    return (
