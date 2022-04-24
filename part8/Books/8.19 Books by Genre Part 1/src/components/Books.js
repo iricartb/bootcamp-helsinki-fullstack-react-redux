@@ -34,7 +34,7 @@ const BooksList = ({genre}) => {
 }
 
 const Books = ({show}) => {
-   const [genre, setGenre] = useState(null)
+   const [genre, setGenre] = useState()
    
    const changeGenre = (genre) => {
       setGenre(genre)

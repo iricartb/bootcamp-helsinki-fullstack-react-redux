@@ -1,14 +1,23 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
-import { useMutation } from '@apollo/client'
-import { LOGIN } from '../queries'
+import { useQuery, useMutation } from '@apollo/client'
+import { LOGIN, ME } from '../queries'
 
-const Login = ({show, setPage, setToken, setNotify}) => {
+const Login = ({show, setPage, token, setToken, setFavoriteGenre, setNotify}) => {
    const [username, setUsername] = useState('')
    const [password, setPassword] = useState('')
 
    const [login, result] = useMutation(LOGIN, { onError: (error) => {
          setNotify(error.graphQLErrors[0].message)
+      }
+   })
+
+   useQuery(ME, {
+      skip: token == null,
+      onCompleted: (data) => {
+         if (data.me != null) {
+            setFavoriteGenre(data.me.favoriteGenre)
+         }
       }
    })
 

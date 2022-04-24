@@ -6,6 +6,7 @@ import Books from './components/Books'
 import NewBook from './components/NewBook'
 import Login from './components/Login'
 import Notify from './components/Notify'
+import Recommend from './components/Recommend'
 
 const HeaderMenu = ({setPage, token, logout, setNotify}) => {
    const changePage = (page) => {
@@ -19,6 +20,7 @@ const HeaderMenu = ({setPage, token, logout, setNotify}) => {
             <button onClick={() => changePage('authors')}>authors</button>
             <button onClick={() => changePage('books')}>books</button>
             <button onClick={() => changePage('add')}>add book</button>
+            <button onClick={() => changePage('recommend')}>recommend</button>
             <button onClick={logout}>logout</button>
          </div>
       )
@@ -38,6 +40,7 @@ const App = () => {
    const [page, setPage] = useState('authors')
    const [token, setToken] = useState(null)
    const [notify, setNotify] = useState(null)
+   const [favoriteGenre, setFavoriteGenre] = useState('')
    const authorsResult = useQuery(ALL_AUTHORS)
    const client = useApolloClient()
 
@@ -46,6 +49,7 @@ const App = () => {
       localStorage.clear()
       client.resetStore()
 
+      setFavoriteGenre('')
       setPage('authors')
    }
 
@@ -63,7 +67,9 @@ const App = () => {
 
          <NewBook show={page === 'add'} />
 
-         <Login show={page === 'login'} setPage={setPage} setToken={setToken} setNotify={setNotify} />
+         <Recommend show={page === 'recommend'} genre={favoriteGenre}/>
+
+         <Login show={page === 'login'} setPage={setPage} token={token} setToken={setToken} setFavoriteGenre={setFavoriteGenre} setNotify={setNotify} />
 
          <Notify notify={notify} />
       </div>
