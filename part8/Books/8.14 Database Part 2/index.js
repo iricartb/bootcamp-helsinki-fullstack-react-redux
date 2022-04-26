@@ -96,7 +96,9 @@ const resolvers = {
 
          const book = new Book({...args, author: author._id})
          
-         return book.save()
+         await book.save()
+
+         return book.populate('author')
       },
       editAuthor: async (root, args) => {
          let findAuthor = await Author.findOne({name: args.name});

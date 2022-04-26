@@ -106,7 +106,7 @@ const resolvers = {
             throw new UserInputError(error.message, { invalidArgs: args })
          }
 
-         return book
+         return book.populate('author')
       },
       editAuthor: async (root, args) => {
          let findAuthor = await Author.findOne({name: args.name});

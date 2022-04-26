@@ -36,14 +36,14 @@ query Me {
 export const CREATE_BOOK = gql`
 mutation createBook($title: String!, $published: Int!, $author: String!, $genres: [String!]!) {
    addBook(
-     title: $title,
-     published: $published,
-     author: $author,
-     genres: $genres
+      title: $title,
+      published: $published,
+      author: $author,
+      genres: $genres
    ) {
-     title
-     published
-     genres
+      title
+      published
+      genres
    }
 }
 `
@@ -51,8 +51,8 @@ mutation createBook($title: String!, $published: Int!, $author: String!, $genres
 export const EDIT_AUTHOR = gql`
 mutation editAuthor($name: String!, $setBornTo: Int!) {
    editAuthor(
-     name: $name,
-     setBornTo: $setBornTo
+      name: $name,
+      setBornTo: $setBornTo
    ) {
       name
       born
@@ -63,7 +63,7 @@ mutation editAuthor($name: String!, $setBornTo: Int!) {
 export const LOGIN = gql`
 mutation login($username: String!, $password: String!) {
    login(username: $username, password: $password)  {
-   value
+      value
    }
 }
 `
